@@ -1,34 +1,41 @@
 import React, {useEffect, useState} from 'react'
-import Imagenes from '../components/imagenes-chulas/Imagenes'
 
+const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
+const CAT_IMAGE_BASE_URL = 'https://cataas.com'
 function App() {
 
-    const [fact, setFact] = useState('')
+    const [fact, setFact] = useState()
     const [image, setImage] = useState()
 
 
     useEffect(() => {
-        fetch('https://catfact.ninja/fact')
-            .then(respuesta => respuesta.json())
-            .then(data =>{ 
-                const {fact} = data
+        fetch(CAT_ENDPOINT_RANDOM_FACT)
+            .then(res => res.json())
+            .then(data => {
+                const { fact } = data
                 setFact(fact)
+
+                const firstWord = fact.split(' ')[0]
+                console.log(firstWord)
+                fetch(`${CAT_IMAGE_BASE_URL}/cat/says/${firstWord}?json=true`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        const { url } = data
+                        setImage(url)
+                    })
             })
 
+        
+            
     }, [])
 
-    useEffect(() => {
-        const word = fact.split(' ')[0]
-        console.log(word)
-        fetch(`https://cataas.com/cat/says/${fact}`)
-            .then(respuesta => respuesta.json())
-            .then(data => setImage(data.fact))
-    }, [fact]);
+
     return (
         <main>
             <h2>App de gatitos asdfasd</h2>
             {fact && <h3>{fact}</h3>}
-            {image && <img src={image}/>}
+            {image && <img src={`${CAT_IMAGE_BASE_URL}${image}`} alt="This is an imagen from caat APi"/>}
         </main>
     )
 }
