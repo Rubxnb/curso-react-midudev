@@ -1,41 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
+import { useCatImage } from './services/useCatImage'
+import { useCatFact } from './services/useCatFact'
+import Otro from './components/otro'
+import './App.css'
 
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
-const CAT_IMAGE_BASE_URL = 'https://cataas.com'
 function App() {
+    const {fact, refreshFact} = useCatFact()
+    const { image } = useCatImage({fact})
 
-    const [fact, setFact] = useState()
-    const [image, setImage] = useState()
-
-
-    useEffect(() => {
-        fetch(CAT_ENDPOINT_RANDOM_FACT)
-            .then(res => res.json())
-            .then(data => {
-                const { fact } = data
-                setFact(fact)
-
-                const firstWord = fact.split(' ')[0]
-                console.log(firstWord)
-                fetch(`${CAT_IMAGE_BASE_URL}/cat/says/${firstWord}?json=true`)
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        const { url } = data
-                        setImage(url)
-                    })
-            })
-
-        
-            
-    }, [])
-
+    function handleClick() {
+        refreshFact()
+    }
 
     return (
         <main>
             <h2>App de gatitos asdfasd</h2>
-            {fact && <h3>{fact}</h3>}
-            {image && <img src={`${CAT_IMAGE_BASE_URL}${image}`} alt="This is an imagen from caat APi"/>}
+            <button onClick={handleClick}>Nueva cita</button>
+            <section>    
+                {fact && <h3>{fact}</h3>}
+                {image && <img src={image} alt="This is an imagen from caat APi"/>}
+            </section>
+            <Otro fact={fact}/>
+            <Otro fact={fact}/>
+            <Otro fact={fact}/>
+            <Otro fact={fact}/>
         </main>
     )
 }
