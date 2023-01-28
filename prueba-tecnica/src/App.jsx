@@ -16,10 +16,9 @@ function App() {
         <main>
             <h2>App de gatitos asdfasd</h2>
             <button onClick={handleClick}>Nueva cita</button>
-            <section>    
-                {fact && <h3>{fact}</h3>}
-                {image && <img src={image} alt="This is an imagen from caat APi"/>}
-            </section>
+            {fact && <p>{fact}</p>}
+            {image && <img src={image} alt="This is an imagen from caat APi"/>}
+            
             <Otro fact={fact}/>
             <Otro fact={fact}/>
             <Otro fact={fact}/>
