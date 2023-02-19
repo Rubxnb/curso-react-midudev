@@ -1,16 +1,17 @@
 import './App.css'
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
 
 function App() {
-  const {movies} = useMovies()
-  const inputRef = useRef()
   const {search, setSearch, error} = useSearch()
+  const {movies, getMovies} = useMovies({search})
+  const inputRef = useRef()
 
   function handleSubmit(event) {
     event.preventDefault()
+    getMovies()
    /*  const value = inputRef.current.value
     console.log(value)
 
