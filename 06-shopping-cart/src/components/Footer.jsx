@@ -1,6 +1,9 @@
 import React from 'react'
+import { useFilters } from '../hooks/useFilters'
 import './Footer.css'
-export default function Footer({filters}) {
+export default function Footer() {
+
+  const {filters} = useFilters()
   return (
     
    <footer className='footer'>
