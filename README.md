@@ -5,3 +5,4 @@
 * 03: Mouse Follower
 * 04: Prueba técnica App Gatitos (Custom Hooks + Testing)
 * 05: Prueba técnica Buscador Películas (useRef, useMemo, useCallback)
+* 06: Prueba técnica Ecomerce y carrito de la compra (useId, useContext, useReduce)
