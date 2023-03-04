@@ -20,7 +20,7 @@ export const cartReducer = (state, action) => {
 
             if(productInCartIndex >= 0 ){
                 const newState = structuredClone(state)
-                newState[productInCartIndex].quantity +=1
+                newState[productInCartIndex].quantity += 1
                 updateLocalStorage(state)
                 return newState
             }
